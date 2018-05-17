@@ -1,61 +1,56 @@
 import React, { Component } from 'react';
-import { View, Text, Button } from 'react-native';
-import Panel from './panel';
+import { View, Text, Button,  } from 'react-native';
 import Firebase from '../firebase/firebase-api';
+import GameList from "./game-list";
 
 class GamesScreen extends Component {
+  constructor(props) {
+		super(props);
+		
+		this.state = {
+      players: [],
+      liveGames: [],
+      historicGames: []
+		};
+  }
+  
   componentDidMount() {
     Firebase.listenToPlayers(p => this.setState({ players: p }));
-    Firebase.listenToGames(games => console.log('GA', games));
+    Firebase.listenToGames(g => this.onGetGamesSuccess(g));
   }
 
   componentWillUnmount() {
     Firebase.unlistenToGames();
     Firebase.unlistenToPlayers();
   }
+
+  onGetGamesSuccess(games) {
+    const liveGames = games.filter(g => g.live);
+    const historicGames = games.filter(g => !g.live);
+
+    this.setState({
+      liveGames,
+      historicGames
+    })
+  }
+
+  onOpenGame(game) {
+    console.log('open game', game);
+  }
+
   render() {
+    const actions = [{
+			text: 'New game',
+			icon: require('../../assets/tennis_player_icon.png'),
+			name: 'new_game',
+			position: 1
+    }];
+    
     return (
+      
       <View style={{ flex: 1, backgroundColor: 'white' }}>
-        <Panel style={{ flex: 0.5 }}>
-          <Text
-            style={{
-              color: 'white',
-              borderBottomWidth: 1,
-              borderBottomColor: 'black',
-              textAlign: 'center',
-              fontSize: 20
-            }}
-          >
-            Somewhat ongoing Games:
-          </Text>
-        </Panel>
-        <Panel style={{ flex: 0.5 }}>
-          <Text
-            style={{
-              color: 'white',
-              borderBottomWidth: 1,
-              borderBottomColor: 'black',
-              textAlign: 'center',
-              fontSize: 20
-            }}
-          >
-            Winner and losers:
-          </Text>
-          <Button
-            title="New game"
-            onPress={() => {
-              // Firebase.newGame(
-              //   this.state.players[0],
-              //   this.state.players[1],
-              //   'today',
-              //   Expo.Constants.deviceId
-              // );
-              this.props.navigation.navigate('CreateGame', {
-                title: 'Create new game'
-              });
-            }}
-          />
-        </Panel>
+        <GameList games={this.state.liveGames} showActions={true} title={"Live action"} />
+        <GameList games={this.state.historicGames} showActions={false} title={"Old news"} />
       </View>
     );
   }
