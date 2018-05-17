@@ -50,10 +50,6 @@ class GamesScreen extends Component {
     ];
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
-<<<<<<< HEAD
-        <GameList navigation={this.props.navigation} games={this.state.liveGames} showActions={true} title={"Live action"} onOpenGame={this.onOpenGame.bind(this)} />
-        <GameList navigation={this.props.navigation} games={this.state.historicGames} showActions={false} title={"Old news"} onOpenGame={this.onOpenGame.bind(this)} />
-=======
         <GameList navigation={this.props.navigation} games={this.state.liveGames}title={"Live action"} onOpenGame={this.onOpenGame.bind(this)} />
         <GameList games={this.state.historicGames} showActions={false} title={"Old news"} onOpenGame={this.onOpenGame.bind(this)} />
         <FloatingAction
@@ -70,7 +66,6 @@ class GamesScreen extends Component {
               }
             }}
           />
->>>>>>> 1efa6d36ec81bed11cd6fde0347a348e8be1397d
       </View>
     );
   }

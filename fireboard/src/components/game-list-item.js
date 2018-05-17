@@ -7,21 +7,6 @@ export default class GameListItem extends Component {
     this.state = {};
   }
 
-<<<<<<< HEAD
-	render() {
-		const textStyle = { 
-			flex: 0.33,
-			textAlign: 'center'
-		};
-		return (
-			<View style={{flex: 1, flexDirection: 'row', padding: 5, backgroundColor: this.props.even ?  '#ddd' : '#fff'}}>
-				<Text style={textStyle}>{this.props.game.home.nick}</Text>
-				<Text style={textStyle}>{`${this.props.game.home.score || '0'} - ${this.props.game.visitor.score || '0'}`}</Text>
-				<Text style={textStyle}>{this.props.game.visitor.nick}</Text>
-			</View>
-		)
-	}
-=======
   render() {
     const textStyle = {
       flex: 0.33,
@@ -83,5 +68,4 @@ export default class GameListItem extends Component {
       </View>
     );
   }
->>>>>>> 1efa6d36ec81bed11cd6fde0347a348e8be1397d
 }
