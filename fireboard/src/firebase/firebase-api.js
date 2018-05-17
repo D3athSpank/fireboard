@@ -121,11 +121,11 @@ class Firebase {
       let scoreRef = Firebase.instance
         .database()
         .ref(`games/${gameId}/home/score`);
-      await scoreRef.update({ score: homeScore });
+      await scoreRef.update(homeScore);
       scoreRef = Firebase.instance
         .database()
         .ref(`games/${gameId}/visitor/score`);
-      await scoreRef.update({ score: visitorScore });
+      await scoreRef.update(visitorScore);
     } catch (error) {
       Firebase.logError(error);
     }
