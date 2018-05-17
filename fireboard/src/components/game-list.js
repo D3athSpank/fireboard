@@ -45,7 +45,7 @@ export default class GameList extends Component {
                   <TouchableOpacity
                     key={i}
                     style={{ flex: 1 }}
-                    onPress={() => this.props.onOpenGame(g)}
+                    onPress={() =>this.props.onOpenGame && this.props.onOpenGame(g)}
                   >
                     <GameListItem game={g} even={i % 2 === 0} />
                   </TouchableOpacity>
