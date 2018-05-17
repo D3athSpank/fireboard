@@ -10,6 +10,7 @@ export default class App extends React.Component {
     super(props);
 
     Firebase.init();
+
     //Firebase.newGame('tobias', 'marco', 'today', Expo.Constants.deviceId);
     // Firebase.addPlayer(
     //   'polpa',
