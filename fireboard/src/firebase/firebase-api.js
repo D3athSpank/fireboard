@@ -90,7 +90,7 @@ class Firebase {
   static newGame = async (home, visitor, date, deviceId) => {
     try {
       const games = Firebase.instance.database().ref('games');
-      await games.push({ home, visitor, date, deviceId });
+      await games.push({ home, visitor, date, deviceId, live: false });
     } catch (error) {
       Firebase.logError(error);
     }
