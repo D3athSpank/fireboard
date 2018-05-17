@@ -39,13 +39,6 @@ class GamesScreen extends Component {
   }
 
   render() {
-    const actions = [{
-			text: 'New game',
-			icon: require('../../assets/tennis_player_icon.png'),
-			name: 'new_game',
-			position: 1
-    }];
-    
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
         <GameList games={this.state.liveGames} showActions={true} title={"Live action"} onOpenGame={this.onOpenGame.bind(this)} />
