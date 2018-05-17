@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text, Button } from 'react-native';
-import Expo from 'expo';
-
 import Panel from './panel';
 import Firebase from '../firebase/firebase-api';
 
@@ -46,12 +44,12 @@ class GamesScreen extends Component {
           <Button
             title="New game"
             onPress={() => {
-              Firebase.newGame(
-                this.state.players[0],
-                this.state.players[1],
-                'today',
-                Expo.Constants.deviceId
-              );
+              // Firebase.newGame(
+              //   this.state.players[0],
+              //   this.state.players[1],
+              //   'today',
+              //   Expo.Constants.deviceId
+              // );
               this.props.navigation.navigate('CreateGame', {
                 title: 'Create new game'
               });
