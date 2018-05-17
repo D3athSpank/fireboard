@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { Text, ScrollView, TouchableOpacity } from 'react-native';
 import Panel from './panel';
 import GameListItem from './game-list-item';
+import { FloatingAction } from 'react-native-floating-action';
 
 export default class GameList extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 		};
+		console.log(this.props);
 	}
 
 	render() {
@@ -19,6 +21,13 @@ export default class GameList extends Component {
       fontSize: 20
 		};
 
+    const actions = [{
+			text: 'New game',
+			icon: require('../../assets/tennis_player_icon.png'),
+			name: 'new_game',
+			position: 1
+		}];
+		
 		if(!this.props.games || !this.props.games.length) {
 			return null;
 		}
@@ -44,6 +53,23 @@ export default class GameList extends Component {
 							)
 						})}
 					</ScrollView>
+				)}
+
+				{this.props.showActions && (
+					<FloatingAction
+						actions={actions}
+						onPressItem={name => {
+							switch (name) {
+								case "new_game":
+									this.props.navigation.navigate("CreateGame", {
+										title: "New game"
+									});
+									break;
+								default:
+									break;
+            }
+          }}
+        />
 				)}
 			</Panel>
 		)
