@@ -1,4 +1,5 @@
 import * as firebase from 'firebase';
+import _ from 'lodash';
 
 class Firebase {
   static init() {
@@ -45,14 +46,38 @@ class Firebase {
   }
 
   static logError = error => {
-    console.log(`FB failure: ${formatError(error)}`);
+    console.log(`FB failure: ${Firebase.formatError(error)}`);
   };
+
+  static snapToArray = snap => {
+    const items = [];
+
+    snap.forEach(s => {
+      items.push({ id: s.key, ...s.val() });
+    });
+
+    return items;
+  };
+
+  static listenToPlayers(f) {
+    Firebase.instance
+      .database()
+      .ref('/players')
+      .on('value', snap => f(Firebase.snapToArray(snap)));
+  }
+
+  static unListenToPlayers(f) {
+    Firebase.instance
+      .database()
+      .ref('/players')
+      .off('value', f);
+  }
 
   static listenToGames(f) {
     Firebase.instance
       .database()
       .ref('/games')
-      .on('value', f);
+      .on('value', snap => f(Firebase.snapToArray(snap)));
   }
 
   static unListenToGames(f) {
@@ -63,9 +88,26 @@ class Firebase {
   }
 
   static newGame = async (home, visitor, date, deviceId) => {
-    const games = Firebase.instance.database().ref('games');
     try {
+      const games = Firebase.instance.database().ref('games');
       await games.push({ home, visitor, date, deviceId });
+    } catch (error) {
+      Firebase.logError(error);
+    }
+  };
+
+  static addPlayer = async (nick, picture = null) => {
+    try {
+      const players = Firebase.instance.database().ref('players');
+      const newUser = await players.push({ nick });
+
+      console.log('NU', newUser.key);
+
+      if (picture) {
+        const playersPics = Firebase.instance.storage().ref('players');
+        const playerPic = playersPics.child(nick);
+        await playerPic.put(picture);
+      }
     } catch (error) {
       Firebase.logError(error);
     }

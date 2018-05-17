@@ -1,14 +1,22 @@
+<<<<<<< HEAD
+import React, { Component } from 'react';
+import { Image } from 'react-native';
+import { View, Text, Button } from 'react-native';
+import { ActivityIndicator } from 'react-native';
+import Panel from './panel';
+=======
 import React, { Component } from "react";
 import { Image, TouchableOpacity } from "react-native";
 import { View, Text, Button, TextInput } from "react-native";
 import { ActivityIndicator } from "react-native";
 import Panel from "./panel";
+>>>>>>> 5c27a76a1b8e0c582ef22899990c5abc8b28ac95
 export default class AddPlayerScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: `${navigation.state.params.title}`,
-    headerTitleStyle: { textAlign: "center", alignSelf: "center" },
+    title: `Add player`,
+    headerTitleStyle: { textAlign: 'center', alignSelf: 'center' },
     headerStyle: {
-      backgroundColor: "white"
+      backgroundColor: 'white'
     }
   });
   constructor(props) {
@@ -20,6 +28,18 @@ export default class AddPlayerScreen extends Component {
   }
   render() {
     return (
+<<<<<<< HEAD
+      <View style={{ flex: 1, backgroundColor: 'white' }}>
+        <Panel style={{ flex: 0.5 }}>
+          <Image
+            style={{
+              flex: 1,
+              width: null,
+              height: null,
+              resizeMode: 'contain'
+            }}
+            source={require('../img/user.png')}
+=======
       <View style={{ flex: 1, backgroundColor: "white" }}>
         <Panel style={{ flex: 0.5, justifyContent: "center" }}>
         <Text style={{ color: "white", textAlign: "center", fontSize: 38 }}>
@@ -32,6 +52,7 @@ export default class AddPlayerScreen extends Component {
             style={{ height: 40, fontSize: 28 }}
             onChangeText={text => this.setState({ newName: text })}
             value={this.state.newName}
+>>>>>>> 5c27a76a1b8e0c582ef22899990c5abc8b28ac95
           />
         </Panel>
         <Panel style={{ flex: 0.5 }}>
