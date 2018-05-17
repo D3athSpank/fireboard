@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { Image, TouchableOpacity } from "react-native";
-import { View, Text, Button, TextInput } from "react-native";
-import { ActivityIndicator } from "react-native";
-import Panel from "./panel";
-import Camera from "./camera";
+import React, { Component } from 'react';
+import { Image, TouchableOpacity } from 'react-native';
+import { View, Text, Button, TextInput } from 'react-native';
+import { ActivityIndicator } from 'react-native';
+import Panel from './panel';
+import Camera from './camera';
 import { FloatingAction } from "react-native-floating-action";
 export default class AddPlayerScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -16,8 +16,8 @@ export default class AddPlayerScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      newName: "",
-      picturePath: ""
+      newName: '',
+      picturePath: ''
     };
   }
   canSave() {
@@ -111,6 +111,7 @@ export default class AddPlayerScreen extends Component {
             if ((onPress = "discard_player")) {
               this.setState({ picturePath: "", newName: "" });
             } else {
+                //TODO: Firebase call here
               console.log("Store player");
             }
           }}

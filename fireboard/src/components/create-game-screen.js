@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import Panel from "../components/panel";
+import PlayerSelector from "./player-selector";
 import { ActivityIndicator } from "react-native";
-import { View, Text, Button, Picker, Image } from "react-native";
+import { View, Text } from "react-native";
 import { FloatingAction } from "react-native-floating-action";
+import Firebase from "../firebase/firebase-api";
+import Expo from "expo";
+import moment from "moment";
 
 export default class CreateGameScreen extends Component {
   constructor(props) {
@@ -11,27 +15,18 @@ export default class CreateGameScreen extends Component {
     this.state = {
       playerOne: null,
       playerTwo: null,
-      players: [
-        {
-          id: 1,
-          name: "Rikard",
-          avatar:
-            "http://i0.kym-cdn.com/entries/icons/original/000/003/549/Dolan.jpg"
-        },
-        {
-          id: 2,
-          name: "Knugen",
-          avatar:
-            "http://i0.kym-cdn.com/entries/icons/original/000/003/549/Dolan.jpg"
-        },
-        {
-          id: 3,
-          name: "Foppa",
-          avatar:
-            "http://i0.kym-cdn.com/entries/icons/original/000/003/549/Dolan.jpg"
-        }
-      ]
+      players: []
     };
+  }
+
+  componentDidMount() {
+    Firebase.listenToPlayers(players => {
+      this.setState({ players });
+    });
+  }
+
+  componentWillUnmount() {
+    Firebase.unListenToPlayers();
   }
 
   static navigationOptions = ({ navigation }) => ({
@@ -42,15 +37,8 @@ export default class CreateGameScreen extends Component {
     }
   });
 
-  getPickerItems() {
-    return this.state.players.map((p, i) => {
-      return <Picker.Item key={i} label={p.name} value={p.id} />;
-    });
-  }
-
   onPlayerSelected(id, isPlayerOne) {
     const player = this.state.players.filter(p => p.id === id);
-
     if (isPlayerOne) {
       this.setState({
         playerOne: (player && player[0]) || null
@@ -68,8 +56,8 @@ export default class CreateGameScreen extends Component {
         text: "Add player",
         icon: require("../../assets/user_plus_icon.png"),
         name: "add_player",
-		position: 1,
-		color:'green'
+        position: 1,
+        color: "green"
       },
       {
         text: "Start game",
@@ -81,38 +69,23 @@ export default class CreateGameScreen extends Component {
 
     return (
       <View style={{ flex: 1, backgroundColor: "white" }}>
-        <Panel style={{ flex: 0.5 }}>
-          {/* TODO: create player selector component */}
-          <Text>Player 1</Text>
-          <Picker
-            selectedValue={
-              (this.state.playerOne && this.state.playerOne.id) || null
-            }
-            style={{ height: 50, width: 150 }}
-            onValueChange={value => {
-              this.onPlayerSelected(value, true);
-            }}
-          >
-            <Picker.Item label={"Select player one"} value={""} />
-            {this.getPickerItems()}
-          </Picker>
-        </Panel>
-
-        <Panel style={{ flex: 0.5 }}>
-          <Text>Player 2</Text>
-          <Picker
-            selectedValue={
-              (this.state.playerTwo && this.state.playerTwo.id) || null
-            }
-            style={{ height: 50, width: 150 }}
-            onValueChange={value => {
-              this.onPlayerSelected(value, false);
-            }}
-          >
-            <Picker.Item label={"Select player two"} value={""} />
-            {this.getPickerItems()}
-          </Picker>
-        </Panel>
+        {this.state.players &&
+          this.state.players.length > 0 && (
+            <View style={{ flex: 1, backgroundColor: "white" }}>
+              <PlayerSelector
+                isPlayerOne={true}
+                players={this.state.players}
+                onPlayerSelected={this.onPlayerSelected.bind(this)}
+                selectedPlayer={this.state.playerOne}
+              />
+              <PlayerSelector
+                isPlayerOne={false}
+                players={this.state.players}
+                onPlayerSelected={this.onPlayerSelected.bind(this)}
+                selectedPlayer={this.state.playerTwo}
+              />
+            </View>
+          )}
 
         <FloatingAction
           actions={actions}
@@ -123,13 +96,27 @@ export default class CreateGameScreen extends Component {
                   title: "Add new player"
                 });
                 break;
-              case "add_player":
-                console.log("start game");
+              case "start_game":
+                if (
+                  !this.state.playerOne ||
+                  !this.state.playerTwo ||
+                  this.state.playerOne.id === this.state.playerTwo.id
+                ) {
+                  return;
+                }
+
+                Firebase.newGame(
+                  this.state.playerOne,
+                  this.state.playerTwo,
+                  moment().format("YYYY-MM-DD"),
+                  Expo.Constants.deviceId
+                );
+
+                this.props.navigation.navigate("Games");
                 break;
               default:
                 break;
             }
-            console.log(`selected button: ${name}`);
           }}
         />
       </View>
