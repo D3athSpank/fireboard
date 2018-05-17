@@ -8,7 +8,6 @@ export default class Panel extends Component {
 
   render() {
 	let { style } = { ...this.props };
-	console.log(style);
 	if(!style.flex){
 		style.flex= 1;
 	}
