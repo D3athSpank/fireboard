@@ -17,7 +17,8 @@ export default class CreateGameScreen extends Component {
 				{id: 3, name: "Foppa", avatar: "http://i0.kym-cdn.com/entries/icons/original/000/003/549/Dolan.jpg"}
 			]
 		};
-  }
+	}
+	
   static navigationOptions = ({ navigation }) => ({
     title: `New Game`,
     headerTitleStyle: { textAlign: "center", alignSelf: "center" },
