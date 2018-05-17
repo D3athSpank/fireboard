@@ -118,14 +118,10 @@ class Firebase {
 
   static updateGameScore = async (gameId, homeScore, visitorScore) => {
     try {
-      let scoreRef = Firebase.instance
-        .database()
-        .ref(`games/${gameId}/home/score`);
-      await scoreRef.update(homeScore);
-      scoreRef = Firebase.instance
-        .database()
-        .ref(`games/${gameId}/visitor/score`);
-      await scoreRef.update(visitorScore);
+      let scoreRef = Firebase.instance.database().ref(`games/${gameId}/home`);
+      await scoreRef.update({ score: homeScore });
+      scoreRef = Firebase.instance.database().ref(`games/${gameId}/visitor`);
+      await scoreRef.update({ score: visitorScore });
     } catch (error) {
       Firebase.logError(error);
     }
@@ -133,7 +129,7 @@ class Firebase {
 
   static gameOver = async gameId => {
     try {
-      const gameRef = Firebase.instance.database().ref(`games/${gameId}/live`);
+      const gameRef = Firebase.instance.database().ref(`games/${gameId}`);
       await gameRef.update({ live: false });
     } catch (error) {
       Firebase.logError(error);
