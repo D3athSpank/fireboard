@@ -35,14 +35,14 @@ class GamesScreen extends Component {
   }
 
   onOpenGame(game) {
-    console.log('open game', game);
+    this.props.navigation.navigate("Game", { id: game.id });
   }
 
   render() {
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
-        <GameList games={this.state.liveGames} showActions={true} title={"Live action"} onOpenGame={this.onOpenGame.bind(this)} />
-        <GameList games={this.state.historicGames} showActions={false} title={"Old news"} onOpenGame={this.onOpenGame.bind(this)} />
+        <GameList navigation={this.props.navigation} games={this.state.liveGames} showActions={true} title={"Live action"} onOpenGame={this.onOpenGame.bind(this)} />
+        <GameList navigation={this.props.navigation} games={this.state.historicGames} showActions={false} title={"Old news"} onOpenGame={this.onOpenGame.bind(this)} />
       </View>
     );
   }
