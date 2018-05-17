@@ -78,6 +78,7 @@ export default class CreateGameScreen extends Component {
                 onPlayerSelected={this.onPlayerSelected.bind(this)}
                 selectedPlayer={this.state.playerOne}
               />
+              {(this.state.playerOne && this.state.playerTwo) && <Text style={{textAlign:'center', fontSize:40}}>vs</Text>}
               <PlayerSelector
                 isPlayerOne={false}
                 players={this.state.players}

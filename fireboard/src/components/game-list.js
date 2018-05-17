@@ -9,15 +9,14 @@ export default class GameList extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    console.log(this.props);
   }
 
   render() {
     const headerStyle = {
       color: 'white',
       borderBottomWidth: 1,
-      borderBottomColor: '#fff',
-      textAlign: 'center',
+      borderBottomColor: "#fff",
+      textAlign: "center",
       fontSize: 20
     };
 
