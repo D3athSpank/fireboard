@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import { View, Text } from 'react-native'
 import Panel from '../components/panel';
+import {ActivityIndicator} from 'react-native';
+import { View, Text, Button } from 'react-native'
 
 export default class CreateGameScreen extends Component {
 	static navigationOptions = ({ navigation }) => ({
-    title: `${navigation.state.params.title}`,
+    title: `New Game`,
 		headerTitleStyle : {textAlign: 'center', alignSelf:'center'},
 		headerStyle:{
 				backgroundColor:'white',
@@ -14,8 +15,11 @@ export default class CreateGameScreen extends Component {
 	render() {
 
 		return (
-			<Panel>
-				<Text>I'm children</Text>
+			<Panel >
+				<Text>I'm the create game screen</Text>
+				
+				{/* Should be replaced with circular + button menu */}
+				<Button title='Add Player' onPress={() => this.props.navigation.navigate('AddPlayer', {title: 'Add new player'})}></Button>
 			</Panel>
 		);
 	}
