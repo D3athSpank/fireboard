@@ -26,7 +26,7 @@ export default class AddPlayerScreen extends Component {
             Cool stage name?
           </Text>
           <Text style={{ color: "white", textAlign: "center", fontSize: 20 }}>
-            Enter it here:
+            Enter it here
           </Text>
           <TextInput
             style={{ height: 40, fontSize: 28 }}
@@ -37,7 +37,10 @@ export default class AddPlayerScreen extends Component {
         <Panel style={{ flex: 0.5 }}>
           <TouchableOpacity
             style={{ flex: 1 }}
-            onPress={() => console.log("Fire Camera")}
+            onPress={() =>
+                this.props.navigation.navigate("Camera", {
+                  title: "Ugly face time!"
+                })}
           >
           <Text style={{ color: "white", textAlign: "center", fontSize: 38 }}>
            Ugly face?
