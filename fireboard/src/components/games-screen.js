@@ -6,7 +6,7 @@ export default class GamesScreen extends Component {
 		return (
 			<View>
 				<Text>I'm the games screen</Text>
-				<Button title='New game' onPress={() => this.props.navigation.navigate('CreateGame', {title: 'Create new game'})}></Button>
+				<Button title='New game' onPress={() => this.props.navigation.navigate("CreateGame")}></Button>
 			</View>
 		);
 	}
