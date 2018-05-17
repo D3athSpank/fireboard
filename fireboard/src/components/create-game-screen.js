@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {ActivityIndicator} from 'react-native';
 import { View, Text } from 'react-native'
+import Panel from '../components/panel';
 
 export default class CreateGameScreen extends Component {
 	static navigationOptions = ({ navigation }) => ({
@@ -10,11 +10,13 @@ export default class CreateGameScreen extends Component {
 				backgroundColor:'white',
 		},
 	});
+
 	render() {
+
 		return (
-			<View >
-				<Text>I'm the create game screen</Text>
-			</View>
+			<Panel>
+				<Text>I'm children</Text>
+			</Panel>
 		);
 	}
 }
