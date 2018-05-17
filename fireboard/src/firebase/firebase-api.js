@@ -87,6 +87,20 @@ class Firebase {
       .off('value', f);
   }
 
+  static listenToGame(gameId, f) {
+    Firebase.instance
+      .database()
+      .ref(`games/${gameId}`)
+      .on('value', snap => f(snap.val()));
+  }
+
+  static unListenToGame(gameId, f) {
+    Firebase.instance
+      .database()
+      .ref(`games/${gameId}`)
+      .off('value', f);
+  }
+
   static newGame = async (home, visitor, date, deviceId) => {
     try {
       const games = Firebase.instance.database().ref('games');
@@ -102,12 +116,36 @@ class Firebase {
     }
   };
 
+  static updateGameScore = async (gameId, homeScore, visitorScore) => {
+    try {
+      let scoreRef = Firebase.instance
+        .database()
+        .ref(`games/${gameId}/home/score`);
+      await scoreRef.update({ score: homeScore });
+      scoreRef = Firebase.instance
+        .database()
+        .ref(`games/${gameId}/visitor/score`);
+      await scoreRef.update({ score: visitorScore });
+    } catch (error) {
+      Firebase.logError(error);
+    }
+  };
+
+  static gameOver = async gameId => {
+    try {
+      const gameRef = Firebase.instance.database().ref(`games/${gameId}/live`);
+      await gameRef.update({ live: false });
+    } catch (error) {
+      Firebase.logError(error);
+    }
+  };
+
   static newPlayer = async (nick, picture = null) => {
     try {
       const players = Firebase.instance.database().ref('players');
       const newUser = await players.push({ nick });
 
-      console.log('NU', newUser.key);
+      // console.log('NU', newUser.key);
 
       if (picture) {
         const playersPics = Firebase.instance.storage().ref('players');
