@@ -7,6 +7,9 @@ class GamesScreen extends Component {
   componentDidMount() {
     Firebase.listenToPlayers(p => this.setState({ players: p }));
     Firebase.listenToGames(games => console.log('GA', games));
+    // Firebase.listenToGame('-LCiY1wtT4hkEKoYICf0', game =>
+    //   console.log('GAME', game)
+    // );
   }
 
   componentWillUnmount() {
@@ -44,15 +47,17 @@ class GamesScreen extends Component {
           <Button
             title="New game"
             onPress={() => {
+              // Firebase.updateGameScore('-LCiY1wtT4hkEKoYICf0', 10, 5);
+              // Firebase.gameOver('-LCiY1wtT4hkEKoYICf0');
               // Firebase.newGame(
               //   this.state.players[0],
               //   this.state.players[1],
               //   'today',
               //   Expo.Constants.deviceId
               // );
-              this.props.navigation.navigate('CreateGame', {
-                title: 'Create new game'
-              });
+              // this.props.navigation.navigate('CreateGame', {
+              //   title: 'Create new game'
+              // });
             }}
           />
         </Panel>
