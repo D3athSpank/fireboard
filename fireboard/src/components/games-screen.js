@@ -1,12 +1,13 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React, {Component} from 'react';
+import { View, Text, Button } from 'react-native';
 
-const GamesScreen = ({}) => {
-    return (
-        <View>
-            <Text>I'm the games screen</Text>
-        </View>
-    )
+export default class GamesScreen extends Component {
+	render() {
+		return (
+			<View>
+				<Text>I'm the games screen</Text>
+				<Button title='New game' onPress={() => this.props.navigation.navigate("CreateGame")}></Button>
+			</View>
+		);
+	}
 }
-
-export default GamesScreen
