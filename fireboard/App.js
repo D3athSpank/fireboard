@@ -1,14 +1,19 @@
 import React from 'react';
-import AppRouter from './src/routing/router'
+import AppRouter from './src/routing/router';
 
-import { init } from './src/firebase/firebase-api'
+import Expo from 'expo';
+
+import Firebase from './src/firebase/firebase-api';
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    Firebase.init();
+    //Firebase.newGame('tobias', 'marco', 'today', Expo.Constants.deviceId);
+  }
+
   render() {
-    init()
-    
-    return (
-      <AppRouter />
-    );
+    return <AppRouter />;
   }
 }
