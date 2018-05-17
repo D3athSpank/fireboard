@@ -11,7 +11,8 @@ export default class GameListItem extends Component {
     const textStyle = {
       flex: 0.33,
 	  textAlign: "center",
-	  paddingTop:10
+	  paddingTop:10,
+	  color:'white'
 	 
     };
     return (

@@ -13,7 +13,13 @@ class GamesScreen extends Component {
       historicGames: []
 		};
   }
-  
+  static navigationOptions = ({ navigation }) => ({
+    title: `FireBoard`,
+    headerTitleStyle: { textAlign: "center", alignSelf: "center" },
+    headerStyle: {
+      backgroundColor: "white"
+    }
+  });
   componentDidMount() {
     Firebase.listenToPlayers(p => this.setState({ players: p }));
     Firebase.listenToGames(g => {
