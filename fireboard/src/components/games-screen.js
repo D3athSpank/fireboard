@@ -17,7 +17,6 @@ class GamesScreen extends Component {
   componentDidMount() {
     Firebase.listenToPlayers(p => this.setState({ players: p }));
     Firebase.listenToGames(g => {
-      console.log('Updated games',g)
       this.onGetGamesSuccess(g)});
   }
 

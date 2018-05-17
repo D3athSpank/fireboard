@@ -56,10 +56,10 @@ export default class GameListItem extends Component {
             resizeMode: "contain"
           }}
           source={
-            this.props.game.home.picture
+            this.props.game.visitor.picture
               ? {
                   uri: `data:image/jpeg;base64,${
-                    this.props.game.home.picture
+                    this.props.game.visitor.picture
                   }`
                 }
               : require("../img/user.png")
