@@ -37,7 +37,7 @@ export default class PlayerSelector extends Component {
 					<Picker.Item label={`Select player ${this.props.isPlayerOne ? "one" : "two"}`} value={""} />
 					{this.getPickerItems()}
 				</Picker>
-				{/* {this.props.selectedPlayer && 
+				{this.props.selectedPlayer && 
 					<Image
 						style={{
 							flex: 1,
@@ -45,8 +45,8 @@ export default class PlayerSelector extends Component {
 							height: null,
 							resizeMode: "contain"
 						}}
-						source={this.state.selectedPlayer.avatar ? {uri: this.state.selectedPlayer.avatar} : require("../img/user.png")}
-					/>} */}
+						source={this.props.selectedPlayer.picture ? {uri:`data:image/jpeg;base64,${this.props.selectedPlayer.picture}`} : require("../img/user.png")}
+					/>}
 			</Panel>
 		)
 	}

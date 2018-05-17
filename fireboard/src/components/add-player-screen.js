@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
-import { Image, TouchableOpacity } from 'react-native';
-import { View, Text, Button, TextInput } from 'react-native';
-import { ActivityIndicator } from 'react-native';
-import Panel from './panel';
-import Camera from './camera';
+import React, { Component } from "react";
+import { Image, TouchableOpacity } from "react-native";
+import { View, Text, Button, TextInput } from "react-native";
+import { ActivityIndicator } from "react-native";
+import Panel from "./panel";
+import Camera from "./camera";
+import { ImagePicker } from "expo";
 import { FloatingAction } from "react-native-floating-action";
-import Firebase from '../firebase/firebase-api';
+import Firebase from "../firebase/firebase-api";
 export default class AddPlayerScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: `Add player`,
@@ -17,13 +18,27 @@ export default class AddPlayerScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      newName: '',
-      picturePath: ''
+      newName: "",
+      picturePath: ""
     };
   }
   canSave() {
     return this.state.newName.length > 0 && this.state.picturePath;
   }
+  _pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      base64: true
+      // aspect: [4, 3],
+    });
+
+    console.log("PICKED", result);
+
+    if (!result.cancelled) {
+      this.setState({ picturePath: result.uri, pictureBase64:result.base64 });
+    }
+  };
+
   render() {
     let actions = [];
     actions.push({
@@ -58,10 +73,10 @@ export default class AddPlayerScreen extends Component {
       <View style={{ flex: 1, backgroundColor: "white" }}>
         <Panel style={{ flex: 0.3, justifyContent: "center" }}>
           <Text style={{ color: "white", textAlign: "center", fontSize: 34 }}>
-           Got a cool nick name?
+            Got a cool nick name?
           </Text>
           <Text style={{ color: "white", textAlign: "center", fontSize: 20 }}>
-            {this.state.newName ?'' :'Enter it here'}
+            {this.state.newName ? "" : "Enter it here"}
           </Text>
           <TextInput
             style={{ height: 40, fontSize: 28 }}
@@ -80,7 +95,8 @@ export default class AddPlayerScreen extends Component {
           </Text>
           <TouchableOpacity
             style={{ flex: 1 }}
-            onPress={() => this.setState({ showCamera: true })}
+            // onPress={() => this.setState({ showCamera: true })}
+            onPress={() => this._pickImage()}
           >
             {this.state.picturePath ? (
               <Image
@@ -112,8 +128,7 @@ export default class AddPlayerScreen extends Component {
             if (onPress == "discard_player") {
               this.setState({ picturePath: "", newName: "" });
             } else {
-              
-              Firebase.newPlayer(this.state.newName, this.state.picturePath);
+              Firebase.newPlayer(this.state.newName, this.state.pictureBase64);
               this.props.navigation.navigate("CreateGame");
             }
           }}

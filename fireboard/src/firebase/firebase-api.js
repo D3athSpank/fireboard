@@ -143,15 +143,15 @@ class Firebase {
   static newPlayer = async (nick, picture = null) => {
     try {
       const players = Firebase.instance.database().ref('players');
-      const newUser = await players.push({ nick });
+      const newUser = await players.push({ nick, picture });
 
       // console.log('NU', newUser.key);
-
-      if (picture) {
-        const playersPics = Firebase.instance.storage().ref('players');
-        const playerPic = playersPics.child(nick);
-        await playerPic.put(picture);
-      }
+      // console.log(picture);
+      // if (picture) {
+      //   const playersPics = Firebase.instance.storage().ref('players');
+      //   const playerPic = playersPics.child(nick);
+      //   await playerPic.putString(picture,'base64');
+      // }
     } catch (error) {
       Firebase.logError(error);
     }
