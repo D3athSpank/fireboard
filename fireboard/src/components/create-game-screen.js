@@ -5,6 +5,9 @@ import { ActivityIndicator } from "react-native";
 import { View, Text } from "react-native";
 import { FloatingAction } from 'react-native-floating-action';
 import Firebase from "../firebase/firebase-api";
+import Expo from "expo";
+import moment from "moment";
+
 export default class CreateGameScreen extends Component {
 	constructor(props) {
 		super(props);
@@ -85,7 +88,15 @@ export default class CreateGameScreen extends Component {
 										if(!this.state.playerOne || !this.state.playerTwo || this.state.playerOne.id === this.state.playerTwo.id) {
 											return;
 										}
-										console.log(`start game between ${this.state.playerOne.nick} and ${this.state.playerTwo.nick}`)
+										
+										Firebase.newGame(
+											this.state.playerOne,
+											this.state.playerTwo,
+											moment().format("YYYY-MM-DD"),
+											Expo.Constants.deviceId
+										);
+
+										this.props.navigation.navigate("Games");
 										break;			
 									default:
 										break;
