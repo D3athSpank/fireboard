@@ -48,8 +48,8 @@ class GamesScreen extends Component {
     
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
-        <GameList games={this.state.liveGames} showActions={true} title={"Live action"} />
-        <GameList games={this.state.historicGames} showActions={false} title={"Old news"} />
+        <GameList games={this.state.liveGames} showActions={true} title={"Live action"} onOpenGame={this.onOpenGame.bind(this)} />
+        <GameList games={this.state.historicGames} showActions={false} title={"Old news"} onOpenGame={this.onOpenGame.bind(this)} />
       </View>
     );
   }
