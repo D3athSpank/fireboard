@@ -9,4 +9,5 @@ export default StackNavigator({
     Games: GamesScreen,
     CreateGame: CreateGameScreen,
     AddPlayer: AddPlayerScreen,
+    
 })
