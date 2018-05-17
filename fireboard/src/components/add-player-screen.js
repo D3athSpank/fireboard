@@ -29,11 +29,7 @@ export default class AddPlayerScreen extends Component {
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       base64: true
-      // aspect: [4, 3],
     });
-
-    console.log("PICKED", result);
-
     if (!result.cancelled) {
       this.setState({ picturePath: result.uri, pictureBase64:result.base64 });
     }
@@ -56,18 +52,6 @@ export default class AddPlayerScreen extends Component {
         position: 1,
         color: "green"
       });
-    }
-    if (this.state.showCamera) {
-      return (
-        <View style={{ flex: 1, backgroundColor: "white" }}>
-          <Camera
-            onPictureTaken={path => {
-              console.log(path);
-              this.setState({ picturePath: path, showCamera: false });
-            }}
-          />
-        </View>
-      );
     }
     return (
       <View style={{ flex: 1, backgroundColor: "white" }}>
@@ -95,7 +79,6 @@ export default class AddPlayerScreen extends Component {
           </Text>
           <TouchableOpacity
             style={{ flex: 1 }}
-            // onPress={() => this.setState({ showCamera: true })}
             onPress={() => this._pickImage()}
           >
             {this.state.picturePath ? (

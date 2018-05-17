@@ -11,7 +11,7 @@ export default class Panel extends Component {
 	if(!style.flex){
 		style.flex= 1;
 	}
-    style = { ...style,padding:10, margin: 10,borderRadius: 10, marginBottom:5, backgroundColor: "#007F00" };
+    style = { ...style,padding:10, margin: 10,borderRadius: 10, marginBottom:2, backgroundColor: "#007F00" };
     return (
       <View
         style={style}

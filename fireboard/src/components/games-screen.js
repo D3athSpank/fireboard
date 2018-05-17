@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Button,  } from 'react-native';
 import Firebase from '../firebase/firebase-api';
 import GameList from "./game-list";
-
+import { FloatingAction } from "react-native-floating-action";
 class GamesScreen extends Component {
   constructor(props) {
 		super(props);
@@ -16,7 +16,9 @@ class GamesScreen extends Component {
   
   componentDidMount() {
     Firebase.listenToPlayers(p => this.setState({ players: p }));
-    Firebase.listenToGames(g => this.onGetGamesSuccess(g));
+    Firebase.listenToGames(g => {
+      console.log('Updated games',g)
+      this.onGetGamesSuccess(g)});
   }
 
   componentWillUnmount() {
@@ -39,10 +41,32 @@ class GamesScreen extends Component {
   }
 
   render() {
+    const actions = [
+      {
+        text: "New game",
+        icon: require("../../assets/tennis_player_icon.png"),
+        name: "new_game",
+        position: 1
+      }
+    ];
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
-        <GameList games={this.state.liveGames} showActions={true} title={"Live action"} onOpenGame={this.onOpenGame.bind(this)} />
+        <GameList navigation={this.props.navigation} games={this.state.liveGames}title={"Live action"} onOpenGame={this.onOpenGame.bind(this)} />
         <GameList games={this.state.historicGames} showActions={false} title={"Old news"} onOpenGame={this.onOpenGame.bind(this)} />
+        <FloatingAction
+            actions={actions}
+            onPressItem={name => {
+              switch (name) {
+                case "new_game":
+                  this.props.navigation.navigate("CreateGame", {
+                    title: "New game"
+                  });
+                  break;
+                default:
+                  break;
+              }
+            }}
+          />
       </View>
     );
   }

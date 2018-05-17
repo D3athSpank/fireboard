@@ -144,14 +144,6 @@ class Firebase {
     try {
       const players = Firebase.instance.database().ref('players');
       const newUser = await players.push({ nick, picture });
-
-      // console.log('NU', newUser.key);
-      // console.log(picture);
-      // if (picture) {
-      //   const playersPics = Firebase.instance.storage().ref('players');
-      //   const playerPic = playersPics.child(nick);
-      //   await playerPic.putString(picture,'base64');
-      // }
     } catch (error) {
       Firebase.logError(error);
     }
