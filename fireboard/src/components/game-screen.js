@@ -41,12 +41,12 @@ export default class GameScreen extends Component {
 
 	visitorPlusPoint() {
 		let score = this.state.game.visitor.score + 1;
-		Firebase.updateGameScore(this.state.gameId, score, this.state.game.home.score);
+		Firebase.updateGameScore(this.state.gameId, this.state.game.home.score, score);
 	}
 
-	homeMinusPoint() {
+	visitorMinusPoint() {
 		let score = this.state.game.visitor.score - 1;
-		Firebase.updateGameScore(this.state.gameId, score, this.state.game.home.score);
+		Firebase.updateGameScore(this.state.gameId, this.state.game.home.score, score);
 	}
 
 	render() {
@@ -105,8 +105,8 @@ export default class GameScreen extends Component {
 							<Text style={{textAlign: 'center', color: '#fff'}}>{this.state.game.visitor.nick}</Text>
 							{!this.state.readOnly && 
 								<View style={{flexDirection: 'row'}}>
-									<TouchableOpacity style={scoreButtonStyle} onPress={() => this.awayPlusPoint()}><Text style={{textAlign: 'center'}}>+</Text></TouchableOpacity>
-									<TouchableOpacity style={{...scoreButtonStyle, marginLeft: 5}}onPress={() => this.awayMinusPoint()} style={{textAlign: 'center'}}><Text>-</Text></TouchableOpacity>
+									<TouchableOpacity style={scoreButtonStyle} onPress={() => this.visitorPlusPoint()}><Text style={{textAlign: 'center'}}>+</Text></TouchableOpacity>
+									<TouchableOpacity style={{...scoreButtonStyle, marginLeft: 5}} onPress={() => this.visitorMinusPoint()}><Text style={{textAlign: 'center'}}>-</Text></TouchableOpacity>
 								</View>
 							}
 						</View>
