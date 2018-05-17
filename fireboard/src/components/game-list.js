@@ -61,8 +61,6 @@ export default class GameList extends Component {
             onPressItem={name => {
               switch (name) {
                 case 'new_game':
-                  Firebase.updateGameScore('-LCiYCKcM-BeOD_YOyCg', 11, 22);
-
                   this.props.navigation.navigate('CreateGame', {
                     title: 'New game'
                   });
