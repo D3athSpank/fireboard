@@ -96,7 +96,7 @@ class Firebase {
     }
   };
 
-  static addPlayer = async (nick, picture = null) => {
+  static newPlayer = async (nick, picture = null) => {
     try {
       const players = Firebase.instance.database().ref('players');
       const newUser = await players.push({ nick });
