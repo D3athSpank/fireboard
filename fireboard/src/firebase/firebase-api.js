@@ -117,6 +117,9 @@ class Firebase {
   };
 
   static updateGameScore = async (gameId, homeScore, visitorScore) => {
+    if (homeScore < 0 || visitorScore < 0) {
+      return;
+    }
     try {
       let scoreRef = Firebase.instance.database().ref(`games/${gameId}/home`);
       await scoreRef.update({ score: homeScore });
