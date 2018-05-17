@@ -95,7 +95,7 @@ class Firebase {
         visitor: { ...visitor, score: 0 },
         date,
         deviceId,
-        live: false
+        live: true
       });
     } catch (error) {
       Firebase.logError(error);
