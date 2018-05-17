@@ -42,7 +42,7 @@ class GamesScreen extends Component {
   }
 
   onOpenGame(game) {
-    console.log('open game', game);
+    this.props.navigation.navigate("Game", { id: game.id });
   }
 
   render() {
