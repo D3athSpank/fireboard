@@ -1,16 +1,23 @@
-import React, {Component} from 'react';
-import { View, Text } from 'react-native'
+import React, { Component } from "react";
+import { View, Text } from "react-native";
 
 export default class Panel extends Component {
-	constructor(props) {
-    	super(props)
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+	let { style } = { ...this.props };
+	if(!style.flex){
+		style.flex= 1;
 	}
-	
-	render() {
-		return (
-			<View style={{margin: 10, padding: 10, backgroundColor: '#007F00', flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-				{this.props.children}
-			</View>
-		);
-	}
+    style = { ...style,padding:10, margin: 10,borderRadius: 10, marginBottom:5, backgroundColor: "#007F00" };
+    return (
+      <View
+        style={style}
+      >
+        {this.props.children}
+      </View>
+    );
+  }
 }
