@@ -5,6 +5,7 @@ import { ActivityIndicator } from 'react-native';
 import Panel from './panel';
 import Camera from './camera';
 import { FloatingAction } from "react-native-floating-action";
+import Firebase from '../firebase/firebase-api';
 export default class AddPlayerScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: `Add player`,
@@ -108,11 +109,12 @@ export default class AddPlayerScreen extends Component {
         <FloatingAction
           actions={actions}
           onPressItem={onPress => {
-            if ((onPress = "discard_player")) {
+            if (onPress == "discard_player") {
               this.setState({ picturePath: "", newName: "" });
             } else {
-                //TODO: Firebase call here
-              console.log("Store player");
+              
+              Firebase.newPlayer(this.state.newName, this.state.picturePath);
+              this.props.navigation.navigate("CreateGame");
             }
           }}
         />
