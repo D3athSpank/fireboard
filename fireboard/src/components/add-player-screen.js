@@ -1,29 +1,29 @@
-import React, { Component } from "react";
-import { Image } from "react-native";
-import { View, Text, Button } from "react-native";
-import { ActivityIndicator } from "react-native";
-import Panel from "./panel";
+import React, { Component } from 'react';
+import { Image } from 'react-native';
+import { View, Text, Button } from 'react-native';
+import { ActivityIndicator } from 'react-native';
+import Panel from './panel';
 export default class AddPlayerScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: `${navigation.state.params.title}`,
-    headerTitleStyle: { textAlign: "center", alignSelf: "center" },
+    title: `Add player`,
+    headerTitleStyle: { textAlign: 'center', alignSelf: 'center' },
     headerStyle: {
-      backgroundColor: "white"
+      backgroundColor: 'white'
     }
   });
 
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: "white" }}>
+      <View style={{ flex: 1, backgroundColor: 'white' }}>
         <Panel style={{ flex: 0.5 }}>
           <Image
             style={{
               flex: 1,
               width: null,
               height: null,
-              resizeMode: "contain"
+              resizeMode: 'contain'
             }}
-            source={require("../img/user.png")}
+            source={require('../img/user.png')}
           />
         </Panel>
         <Panel style={{ flex: 0.5 }}>
