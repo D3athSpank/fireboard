@@ -95,16 +95,19 @@ export default class GameScreen extends Component {
       <View
         style={{ flex: 1, justifyContent: "center", backgroundColor: "#fff" }}
       >
+      
         <Panel style={{ flex: 1, justifyContent: "center" }}>
-          <View style={{ flex: 0.4, alignItems: "center" }}>
+          <View style={{ flex: 0.5, alignItems: "center" }}>
             <Text style={{ textAlign: "center", color: "#fff", fontsize: 20 }}>
               {this.state.game.home.nick}
             </Text>
             <Image
               style={{
-                width: 150,
-                height: 150,
-                resizeMode: "contain"
+                width: 170,
+                height: 170,
+                marginBottom:5,
+                resizeMode: "contain",
+                borderRadius:10
               }}
               source={
                 this.state.game.home.picture
@@ -117,7 +120,7 @@ export default class GameScreen extends Component {
               }
             />
             {!this.state.readOnly && (
-              <View style={{ flexDirection: "row" }}>
+              <View style={{ flexDirection: "row"}}>
                 <TouchableOpacity
                   style={scoreButtonStyle}
                   onPress={() => this.homePlusPoint()}
@@ -133,20 +136,20 @@ export default class GameScreen extends Component {
               </View>
             )}
           </View>
-          <View style={{ flex: 0.2 }}>
+          <View style={{ }}>
             <Text
               style={{
                 textAlign: "center",
                 color: "#fff",
-                fontSize: 60,
-                backgroundColor: "lime"
+                fontSize: 65,
+                color: "lime"
               }}
             >{`${this.state.game.home.score || "0"} - ${this.state.game.visitor
               .score || "0"}`}</Text>
           </View>
           <View
             style={{
-              flex: 0.4,
+              flex: 0.5,
               alignItems: "center",
               justifyContent: "flex-start"
             }}
@@ -169,9 +172,11 @@ export default class GameScreen extends Component {
             )}
             <Image
               style={{
-                width: 150,
-                height: 150,
-                resizeMode: "contain"
+                width: 170,
+                height: 170,
+                resizeMode: "contain",
+                marginTop:5,
+                borderRadius:10
               }}
               source={
                 this.state.game.visitor.picture

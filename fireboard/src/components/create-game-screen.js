@@ -58,15 +58,16 @@ export default class CreateGameScreen extends Component {
         name: "add_player",
         position: 1,
         color: "green"
-      },
-      {
+      }
+    ];
+    if (this.state.playerOne && this.state.playerTwo) {
+      actions.push({
         text: "Start game",
         icon: require("../../assets/check_icon.png"),
         name: "start_game",
         position: 2
-      }
-    ];
-
+      });
+    }
     return (
       <View style={{ flex: 1, backgroundColor: "white" }}>
         {this.state.players &&
@@ -78,7 +79,10 @@ export default class CreateGameScreen extends Component {
                 onPlayerSelected={this.onPlayerSelected.bind(this)}
                 selectedPlayer={this.state.playerOne}
               />
-              {(this.state.playerOne && this.state.playerTwo) && <Text style={{textAlign:'center', fontSize:40}}>vs</Text>}
+              {this.state.playerOne &&
+                this.state.playerTwo && (
+                  <Text style={{ textAlign: "center", fontSize: 40 }}>vs</Text>
+                )}
               <PlayerSelector
                 isPlayerOne={false}
                 players={this.state.players}
