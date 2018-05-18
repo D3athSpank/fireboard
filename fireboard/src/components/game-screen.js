@@ -45,6 +45,10 @@ export default class GameScreen extends Component {
   }
 
   homeMinusPoint() {
+    if(!this.state.game.home.score) {
+      return;
+    }
+
     let score = this.state.game.home.score - 1;
     Firebase.updateGameScore(
       this.state.gameId,
@@ -63,6 +67,10 @@ export default class GameScreen extends Component {
   }
 
   visitorMinusPoint() {
+    if(!this.state.game.visitor.score) {
+      return;
+    }
+
     let score = this.state.game.visitor.score - 1;
     Firebase.updateGameScore(
       this.state.gameId,
@@ -189,7 +197,7 @@ export default class GameScreen extends Component {
               }
             />
 
-            <Text style={{ textAlign: "center", color: "#fff", fontsize: 20 }}>
+            <Text style={{ textAlign: "center", color: "#fff", fontSize: 20 }}>
               {this.state.game.visitor.nick}
             </Text>
           </View>
